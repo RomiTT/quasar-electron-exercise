@@ -145,7 +145,13 @@
     </q-header>
 
     <!-- Left drawer -->
-    <q-drawer v-model="leftDrawerOpen" side="left" bordered content-class="bg-grey-2">
+    <q-drawer 
+              v-model="leftDrawerOpen" 
+              side="left" 
+              bordered content-class="bg-grey-2"
+              behavior="desktop"
+              overlay="true"
+    >
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
         <q-item clickable tag="a" target="_blank" href="http://v1.quasar-framework.org">
