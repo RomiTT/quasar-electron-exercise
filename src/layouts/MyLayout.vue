@@ -33,8 +33,8 @@
           <div class="q-gutter-x-md">
             <q-btn dense flat icon="remove" @click="minimize" />
             <q-btn dense flat @click="maximize">
-              <q-icon name="crop_square" v-show="isMaximizedWindow() === false"/>
-              <q-icon style="font-size: 0.95rem; transform: rotate(180deg)" name="filter_none" v-show="isMaximizedWindow() === true"/>
+              <q-icon name="crop_square" v-show="maximized===false"/>
+              <q-icon style="font-size: 0.95rem; transform: rotate(180deg)" name="filter_none" v-show="maximized===true"/>
             </q-btn>
             <q-btn dense flat icon="close" @click="closeApp" />
           </div>
@@ -202,7 +202,6 @@
         <router-view/>
       </q-page-container>
     </q-layout>    
-
     
   </div>
 
@@ -217,7 +216,8 @@ export default {
   data() {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop,
-      about: false
+      about: false,
+      maximized: false
     };
   },
   computed: {
@@ -257,8 +257,10 @@ export default {
 
         if (win.isMaximized()) {
           win.unmaximize()
+          this.$data.maximized = false
         } else {
           win.maximize()
+           this.$data.maximized = true
         }
       }
     },
@@ -304,6 +306,9 @@ export default {
         .onDismiss(() => {
           console.log("Called on OK or Cancel");
         });
+    },
+    mounted: async() => {
+      this.$data.maximized = this.isMaximizedWindow()
     }
   }
 };

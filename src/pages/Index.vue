@@ -18,7 +18,6 @@ export default {
   methods: {},
   mounted: () => {
     var header = document.getElementById("my-layout-header")
-
     var page = document.getElementById("index-vue-page")
     page.style.height= `${window.innerHeight-header.offsetHeight}px`
 
