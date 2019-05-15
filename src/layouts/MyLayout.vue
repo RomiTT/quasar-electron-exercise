@@ -24,9 +24,9 @@
     </q-dialog>
     
     <q-layout view="hHh lpR fFf">
-      <q-header elevated class="bg-grey-10">
+      <q-header id="my-layout-header" elevated class="bg-grey-10">
         <!-- Custom Titlebar -->
-        <!-- <q-bar class="q-electron-drag">
+        <q-bar class="q-electron-drag">
           <img src="~assets/app-icon.png" style="width:1rem; height:1rem;"/>
           <div>Quasar Electron Application</div>
           <q-space />
@@ -38,7 +38,7 @@
             </q-btn>
             <q-btn dense flat icon="close" @click="closeApp" />
           </div>
-        </q-bar> -->
+        </q-bar>
 
         <!-- Menus -->
         <!-- <div class="q-pa-sm q-pl-md row items-center">
