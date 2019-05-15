@@ -33,12 +33,14 @@
 
         <q-space />
 
-        <q-btn dense flat icon="remove" @click="minimize" />
-        <q-btn dense flat @click="maximize" style="margin-left:18px; margin-right:18px;">
-          <q-icon name="crop_square" v-show="isMaximizedWindow() === false"/>
-          <q-icon style="font-size: 0.95rem; transform: rotate(180deg)" name="filter_none" v-show="isMaximizedWindow() === true"/>
-        </q-btn>
-        <q-btn dense flat icon="close" @click="closeApp" />
+        <div class="q-gutter-x-md">
+          <q-btn dense flat icon="remove" @click="minimize" />
+          <q-btn dense flat @click="maximize">
+            <q-icon name="crop_square" v-show="isMaximizedWindow() === false"/>
+            <q-icon style="font-size: 0.95rem; transform: rotate(180deg)" name="filter_none" v-show="isMaximizedWindow() === true"/>
+          </q-btn>
+          <q-btn dense flat icon="close" @click="closeApp" />
+        </div>
       </q-bar>
 
 
