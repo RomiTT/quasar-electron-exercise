@@ -1,29 +1,26 @@
 <template>
-  <q-page id="index-vue-page" class="flex flex-start column" style="overflow:auto;">
+  <q-scrollable-page pageId="index-vue-page" mainHeaderId="my-layout-header" class="flex flex-start column">
     <img alt="Quasar logo" src="~assets/quasar-logo-full.svg" />   
-  </q-page>
+  </q-scrollable-page>
 </template>
 
 <style scoped>
 </style>
 
 <script>
+// @ is an alias to /src
+import QScrollablePage from '../components/QScrollablePage.vue'
+
 export default {
   name: "PageIndex",
-  data: () => {
+  components: {
+    QScrollablePage
+  },
+  data() {
     return {}
   },
   props: {},
   computed: {},
-  methods: {},
-  mounted: () => {
-    var header = document.getElementById("my-layout-header")
-    var page = document.getElementById("index-vue-page")
-    page.style.height= `${window.innerHeight-header.offsetHeight}px`
-
-    window.onresize = () => {
-      page.style.height= `${window.innerHeight-header.offsetHeight}px`
-    }
-  }
+  methods: {}
 };
 </script>
