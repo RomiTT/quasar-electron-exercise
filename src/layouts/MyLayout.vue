@@ -25,7 +25,7 @@
 
 
 
-    <q-header elevated>
+    <q-header elevated class="bg-grey-10">
       <!-- Custom Titlebar -->
       <q-bar class="q-electron-drag">
         <img src="~assets/app-icon.png" style="width:1rem; height:1rem;"/>
