@@ -22,7 +22,7 @@ function createWindow() {
     minWidth: 400,
     minHeight: 300,
     useContentSize: true,
-    frame: false,
+    frame: true,
     webPreferences: { nodeIntegration: true }
   });
 

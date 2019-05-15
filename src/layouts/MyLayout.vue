@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <div>
     <!-- About Dialog -->
     <q-dialog v-model="about" persistent>
       <q-card class="bg-primary text-white">
@@ -22,191 +22,190 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+    
+    <q-layout view="hHh lpR fFf">
+      <q-header elevated class="bg-grey-10">
+        <!-- Custom Titlebar -->
+        <!-- <q-bar class="q-electron-drag">
+          <img src="~assets/app-icon.png" style="width:1rem; height:1rem;"/>
+          <div>Quasar Electron Application</div>
+          <q-space />
+          <div class="q-gutter-x-md">
+            <q-btn dense flat icon="remove" @click="minimize" />
+            <q-btn dense flat @click="maximize">
+              <q-icon name="crop_square" v-show="isMaximizedWindow() === false"/>
+              <q-icon style="font-size: 0.95rem; transform: rotate(180deg)" name="filter_none" v-show="isMaximizedWindow() === true"/>
+            </q-btn>
+            <q-btn dense flat icon="close" @click="closeApp" />
+          </div>
+        </q-bar> -->
 
+        <!-- Menus -->
+        <!-- <div class="q-pa-sm q-pl-md row items-center">
+          <div class="cursor-pointer non-selectable">
+            File
+            <q-menu>
+              <q-list dense style="min-width: 100px">
+                <q-item clickable v-close-popup>
+                  <q-item-section>Open...</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup>
+                  <q-item-section>New</q-item-section>
+                </q-item>
 
+                <q-separator />
 
-    <q-header elevated class="bg-grey-10">
-      <!-- Custom Titlebar -->
-      <q-bar class="q-electron-drag">
-        <img src="~assets/app-icon.png" style="width:1rem; height:1rem;"/>
-        <div>Quasar Electron Application</div>
+                <q-item clickable>
+                  <q-item-section>Preferences</q-item-section>
+                  <q-item-section side>
+                    <q-icon name="keyboard_arrow_right" />
+                  </q-item-section>
 
-        <q-space />
+                  <q-menu anchor="top right" self="top left">
+                    <q-list>
+                      <q-item
+                        v-for="n in 3"
+                        :key="n"
+                        dense
+                        clickable
+                      >
+                        <q-item-section>Submenu Label</q-item-section>
+                        <q-item-section side>
+                          <q-icon name="keyboard_arrow_right" />
+                        </q-item-section>
+                        <q-menu auto-close anchor="top right" self="top left">
+                          <q-list>
+                            <q-item
+                              v-for="n in 3"
+                              :key="n"
+                              dense
+                              clickable
+                            >
+                              <q-item-section>3rd level Label</q-item-section>
+                            </q-item>
+                          </q-list>
+                        </q-menu>
+                      </q-item>
+                    </q-list>
+                  </q-menu>
+                </q-item>
 
-        <div class="q-gutter-x-md">
-          <q-btn dense flat icon="remove" @click="minimize" />
-          <q-btn dense flat @click="maximize">
-            <q-icon name="crop_square" v-show="isMaximizedWindow() === false"/>
-            <q-icon style="font-size: 0.95rem; transform: rotate(180deg)" name="filter_none" v-show="isMaximizedWindow() === true"/>
+                <q-separator />
+
+                <q-item clickable v-close-popup @click="closeApp">
+                  <q-item-section>Quit</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </div>
+
+          <div class="q-ml-md cursor-pointer non-selectable">
+            Edit
+            <q-menu auto-close>
+              <q-list dense style="min-width: 100px">
+                <q-item clickable>
+                  <q-item-section>Cut</q-item-section>
+                </q-item>
+                <q-item clickable>
+                  <q-item-section>Copy</q-item-section>
+                </q-item>
+                <q-item clickable>
+                  <q-item-section>Paste</q-item-section>
+                </q-item>
+                <q-separator />
+                <q-item clickable>
+                  <q-item-section>Select All</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </div>
+        </div> -->
+
+        <!-- Main Toolbar -->
+        <q-toolbar>
+          <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
+            <q-icon name="menu"/>
           </q-btn>
-          <q-btn dense flat icon="close" @click="closeApp" />
-        </div>
-      </q-bar>
 
+          <q-toolbar-title>Quasar App</q-toolbar-title>
 
-      <!-- Menus -->
-      <!-- <div class="q-pa-sm q-pl-md row items-center">
-        <div class="cursor-pointer non-selectable">
-          File
-          <q-menu>
-            <q-list dense style="min-width: 100px">
-              <q-item clickable v-close-popup>
-                <q-item-section>Open...</q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>New</q-item-section>
-              </q-item>
+          <q-btn flat dense round aria-label="Home" to="/">
+            <q-icon name="home"/>
+          </q-btn>
 
-              <q-separator />
+          <q-btn flat dense round aria-label="About" @click="about = true">
+            <q-icon name="info"/>
+          </q-btn>
+        </q-toolbar>
+      </q-header>
 
-              <q-item clickable>
-                <q-item-section>Preferences</q-item-section>
-                <q-item-section side>
-                  <q-icon name="keyboard_arrow_right" />
-                </q-item-section>
+      <!-- Left drawer -->
+      <q-drawer 
+                v-model="leftDrawerOpen" 
+                side="left" 
+                bordered content-class="bg-grey-2"
+                behavior="desktop"
+                v-bind:overlay="true"
+      >
+        <q-list>
+          <q-item-label header>Essential Links</q-item-label>
+          <q-item clickable tag="a" target="_blank" href="http://v1.quasar-framework.org">
+            <q-item-section avatar>
+              <q-icon name="school"/>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Docs</q-item-label>
+              <q-item-label caption>v1.quasar-framework.org</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">
+            <q-item-section avatar>
+              <q-icon name="code"/>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Github</q-item-label>
+              <q-item-label caption>github.com/quasarframework</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable tag="a" target="_blank" href="http://chat.quasar-framework.org">
+            <q-item-section avatar>
+              <q-icon name="chat"/>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Discord Chat Channel</q-item-label>
+              <q-item-label caption>chat.quasar-framework.org</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable tag="a" target="_blank" href="https://forum.quasar-framework.org">
+            <q-item-section avatar>
+              <q-icon name="record_voice_over"/>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Forum</q-item-label>
+              <q-item-label caption>forum.quasar-framework.org</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">
+            <q-item-section avatar>
+              <q-icon name="rss_feed"/>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Twitter</q-item-label>
+              <q-item-label caption>@quasarframework</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-drawer>
 
-                <q-menu anchor="top right" self="top left">
-                  <q-list>
-                    <q-item
-                      v-for="n in 3"
-                      :key="n"
-                      dense
-                      clickable
-                    >
-                      <q-item-section>Submenu Label</q-item-section>
-                      <q-item-section side>
-                        <q-icon name="keyboard_arrow_right" />
-                      </q-item-section>
-                      <q-menu auto-close anchor="top right" self="top left">
-                        <q-list>
-                          <q-item
-                            v-for="n in 3"
-                            :key="n"
-                            dense
-                            clickable
-                          >
-                            <q-item-section>3rd level Label</q-item-section>
-                          </q-item>
-                        </q-list>
-                      </q-menu>
-                    </q-item>
-                  </q-list>
-                </q-menu>
-              </q-item>
+      <!-- Main Page -->
+      <q-page-container>
+        <router-view/>
+      </q-page-container>
+    </q-layout>    
 
-              <q-separator />
+    
+  </div>
 
-              <q-item clickable v-close-popup @click="closeApp">
-                <q-item-section>Quit</q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-        </div>
-
-        <div class="q-ml-md cursor-pointer non-selectable">
-          Edit
-          <q-menu auto-close>
-            <q-list dense style="min-width: 100px">
-              <q-item clickable>
-                <q-item-section>Cut</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section>Copy</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section>Paste</q-item-section>
-              </q-item>
-              <q-separator />
-              <q-item clickable>
-                <q-item-section>Select All</q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-        </div>
-      </div> -->
-
-
-      <!-- Main Toolbar -->
-      <q-toolbar>
-        <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
-          <q-icon name="menu"/>
-        </q-btn>
-
-        <q-toolbar-title>Quasar App</q-toolbar-title>
-
-        <q-btn flat dense round aria-label="Home" to="/">
-          <q-icon name="home"/>
-        </q-btn>
-
-        <q-btn flat dense round aria-label="About" @click="about = true">
-          <q-icon name="info"/>
-        </q-btn>
-      </q-toolbar>
-    </q-header>
-
-    <!-- Left drawer -->
-    <q-drawer 
-              v-model="leftDrawerOpen" 
-              side="left" 
-              bordered content-class="bg-grey-2"
-              behavior="desktop"
-              overlay="true"
-    >
-      <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="http://v1.quasar-framework.org">
-          <q-item-section avatar>
-            <q-icon name="school"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>v1.quasar-framework.org</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">
-          <q-item-section avatar>
-            <q-icon name="code"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Github</q-item-label>
-            <q-item-label caption>github.com/quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="http://chat.quasar-framework.org">
-          <q-item-section avatar>
-            <q-icon name="chat"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Discord Chat Channel</q-item-label>
-            <q-item-label caption>chat.quasar-framework.org</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://forum.quasar-framework.org">
-          <q-item-section avatar>
-            <q-icon name="record_voice_over"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Forum</q-item-label>
-            <q-item-label caption>forum.quasar-framework.org</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">
-          <q-item-section avatar>
-            <q-icon name="rss_feed"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Twitter</q-item-label>
-            <q-item-label caption>@quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
-
-    <!-- Main Page -->
-    <q-page-container>
-      <router-view/>
-    </q-page-container>
-  </q-layout>
 </template>
 
 <script>
