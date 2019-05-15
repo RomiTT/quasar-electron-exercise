@@ -42,7 +42,8 @@ module.exports = function(ctx) {
         "QTooltip",
         "QBar",
         "QMenu",
-        "QSeparator"
+        "QSeparator",
+        "QScrollArea"
       ],
 
       directives: ["Ripple", "ClosePopup"],
