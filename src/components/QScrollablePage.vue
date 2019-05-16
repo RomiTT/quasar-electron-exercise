@@ -36,24 +36,6 @@ export default {
 }
 </script>
 
-<style>
-  /* width */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
+<style scoped>
 
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(180, 180, 180); 
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(160, 160, 160); 
-  }
 </style>
