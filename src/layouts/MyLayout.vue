@@ -133,7 +133,7 @@
             <q-icon name="home"/>
           </q-btn>
 
-          <q-btn flat dense round aria-label="About" @click="about = true">
+          <q-btn flat dense round aria-label="About" @click="openAboutDialog()">
             <q-icon name="info"/>
           </q-btn>
         </q-toolbar>
@@ -264,7 +264,13 @@ export default {
         }
       }
     },
+    openAboutDialog() {
+        this.$data.about = true
 
+        import("../../node-addons/hello-world/build/Release/hello.node").then((value) => {
+        alert(value.hello())
+      })
+    },
     closeApp () {
       if (process.env.MODE === 'electron') {
         this.$q.electron.remote.BrowserWindow.getFocusedWindow().close()
