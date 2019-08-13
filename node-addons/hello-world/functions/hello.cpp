@@ -1,8 +1,17 @@
 #include "hello.h"
+#include <windows.h>
+
 
 std::string my_functions::hello()
 {
-  return "Hello World";
+  RECT rc;
+  GetWindowRect(NULL, &rc);
+
+  char buff[100];
+  snprintf(buff, sizeof(buff), "Rectangle(%d, %d, %d, %d)", rc.left, rc.top, rc.right, rc.bottom);
+
+  return buff;
+  //return "Hello World";
 }
 
 Napi::String my_functions::HelloWrapped(const Napi::CallbackInfo &info)
